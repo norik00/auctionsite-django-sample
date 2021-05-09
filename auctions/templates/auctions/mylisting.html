@@ -1,0 +1,47 @@
+{% extends "auctions/layout2.html" %}
+{% load static %}
+{% load humanize %} 
+{% load tz %}
+
+{% block content %}
+    {% for listing in listings %}
+        <div class="item--flex">
+                <div class="flex">
+                    <div class="img-outer--lists">
+                        <div class="img-inner">
+                            <img src="{{ listing.image.url }}" alt="listing image" width="150">
+                        </div>
+                    </div>
+                </div>
+            <h3>
+                <a href="{% url 'listing' listing.id %}">{{ listing.product_name }}</a>
+            </h3>
+
+            <p class="align-r">
+                <span class="tag bg-yellow">
+                    {% if listing.is_closed %}
+                        closed
+                    {% else %}
+                        {{ listing.bid_period | timeuntil }}
+                    {% endif %}
+                </span>
+            </p>
+
+            <div class="block-sm">
+                <strong>${{ listing.current_price | floatformat:"0" | intcomma }}</strong>
+                Bid: {{ listing.bidrecord_set.count }}
+            </div>
+
+            <div class="block-sm">
+                <p>{{ listing.short_discription }}</p>
+            </div>
+
+            <div class="block-sm mt-auto align-r">
+                <p>Category: {{ listing.category }}</p>
+                <p>Registerd At: {{ listing.registerd_at | timezone:tz }}</p>
+            </div>
+        </div>
+    {% empty %} 
+        <p>No auction listing products.</p>
+    {% endfor %}
+{% endblock %}

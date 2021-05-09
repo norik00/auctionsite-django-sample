@@ -1,0 +1,8 @@
+{% load static %}
+
+{% for category in categories %}
+    <a href="{% url 'index' %}?category={{ category.category }}">
+        {{ category.category | lower }}
+    </a>
+{% endfor %}
+<a href="{% url 'categories' %}">all category▼</a>

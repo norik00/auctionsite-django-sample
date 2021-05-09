@@ -1,0 +1,23 @@
+{% extends "auctions/layout3.html" %}
+{% load static %}
+{% load humanize %} 
+{% load tz %}
+
+{% block content %}
+    <div class="item-auto">
+        <div class="block-sm">
+            {% if form.errors %}
+                {{ form.non_field_errors }}
+            {% endif %}
+
+            <form action="{% url 'create' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form.visible_fields %}
+                    {{ field }}
+                    {{ field.errors }}
+                {% endfor %}
+                <button type="submit" class="size-l">Create</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

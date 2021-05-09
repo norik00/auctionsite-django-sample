@@ -1,0 +1,11 @@
+{% load static %}
+
+<form method="GET" action="{% url 'index' %}" class="flex">
+    <input type="text" 
+        placeholder="Search Items" 
+        class="side-btn shadow radius normal"
+        name="keyword"
+        value="{{ keyword }}">
+    <input type="text" name="category" value="{{ category }}" hidden>
+    <input type="submit" hidden>
+</form>

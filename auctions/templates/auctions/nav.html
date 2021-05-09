@@ -1,0 +1,25 @@
+<h1>
+    <a href="{% url 'index' %}">Art Auctions</a>
+</h1>
+
+{% if user.is_authenticated %}
+    <a href="{% url 'mylisting' %}" class="ml-auto textline" style="margin-right: .5rem;">
+        Mylisting
+    </a>
+    <a href="{% url 'watchlist' %}" class="textline" style="margin-right: .5rem;">
+        Watchlist
+    </a>
+    <p>
+        {{ user.username }}
+    </p>
+    <a href="{% url 'logout' %}" class="btn bg-blue">
+        Sign Out
+    </a>
+{% else %}
+    <a href="{% url 'login' %}" class="ml-auto">
+        Sign In
+    </a>
+    <a href="{% url 'register' %}" class="btn bg-blue">
+        Sign Up
+    </a>
+{% endif %}

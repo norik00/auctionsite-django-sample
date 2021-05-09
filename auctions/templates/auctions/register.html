@@ -1,0 +1,26 @@
+{% extends "auctions/layout3.html" %}
+
+{% block content %}
+    <div class="item-auto">
+        <div class="block-sm">
+            {% if message %}
+                <p style="color:#ff4e50;font-weight:bold;">{{ message }}</p>
+            {% endif %}
+        </div>
+
+        <div class="block-sm">
+            <form action="{% url 'register' %}" method="post">
+                {% csrf_token %}
+                <input autofocus type="text" name="username" class="normal" placeholder="Username" required>
+                <input type="email" name="email" class="normal" placeholder="Email Address" required>
+                <input type="password" name="password" class="normal" placeholder="Password" required>
+                <input type="password" name="confirmation" class="normal" placeholder="Confirm Password" required>
+                <button type="submit" class="size-l">Create Acount</button>
+            </form>
+        </div>
+
+        <div class="block-sm">
+            Already have an account? <a href="{% url 'login' %}" class="textline">Sign In here.</strong>
+        </div>
+    </div>
+{% endblock %}

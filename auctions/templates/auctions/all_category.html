@@ -1,0 +1,43 @@
+{% extends "auctions/layout2.html" %}
+{% load static %}
+{% load humanize %} 
+{% load tz %}
+
+
+{% block body %}
+    <div class="flex--around">
+        {% block search %}
+        {% endblock %}
+
+        {% block category %}
+        {% endblock %}
+    </div>
+
+    <section id="content">
+        <h2>
+            {{ page_title }}
+        </h2>
+        <div class="flex--top">
+            {% block content %}
+                {% for category in categories %}
+                    <div class="item--flex-auto">
+                        <div class="flex">
+                            <div class="img-outer--lists">
+                                <div class="img-inner">
+                                    <img src="{{ category.image.url }}" alt="category image" width="150">
+                                </div>
+                            </div>
+                        </div>
+                        <h3>
+                            <a href="{% url 'index' %}?category={{ category.category }}" class="textline">
+                                {{ category.category }}
+                            </a>
+                        </h3>
+                    </div>
+                {% empty %} 
+                    <p>No auction listing products.</p>
+                {% endfor %}
+            {% endblock %}
+        </div>
+</section>
+{% endblock %}
